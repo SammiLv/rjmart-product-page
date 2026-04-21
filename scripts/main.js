@@ -1,11 +1,85 @@
 let currentFeature = 0;
+let featureCopyAnimationFrame = null;
+let featureCopyAnimationTimer = null;
+let featureCopyDelayTimer = null;
 
-function updateFeature(index) {
+function buildFeatureCarousel() {
+  const track = document.getElementById('feature-carousel-track');
+  if (!track) {
+    return;
+  }
+
+  track.innerHTML = window.features
+    .map(
+      feature => `
+        <div class="feature-carousel-slide">
+          <img src="${feature.imagePath}" alt="${feature.title}" />
+        </div>
+      `
+    )
+    .join('');
+}
+
+function animateFeatureCopy(feature, immediate = false) {
+  const copy = document.getElementById('feature-copy');
+  const title = document.getElementById('feature-title');
+  const desc = document.getElementById('feature-desc');
+
+  if (!copy || !title || !desc) {
+    return;
+  }
+
+  if (featureCopyAnimationFrame) {
+    cancelAnimationFrame(featureCopyAnimationFrame);
+    featureCopyAnimationFrame = null;
+  }
+
+  if (featureCopyAnimationTimer) {
+    clearTimeout(featureCopyAnimationTimer);
+    featureCopyAnimationTimer = null;
+  }
+
+  if (featureCopyDelayTimer) {
+    clearTimeout(featureCopyDelayTimer);
+    featureCopyDelayTimer = null;
+  }
+
+  if (immediate) {
+    copy.classList.remove('is-leaving', 'is-entering');
+    title.textContent = feature.title;
+    desc.textContent = feature.desc;
+    return;
+  }
+
+  copy.classList.remove('is-entering', 'is-leaving');
+
+  const copyLeaveDelayMs = 100;
+
+  featureCopyDelayTimer = setTimeout(() => {
+    featureCopyDelayTimer = null;
+    copy.classList.add('is-leaving');
+
+    featureCopyAnimationTimer = setTimeout(() => {
+      title.textContent = feature.title;
+      desc.textContent = feature.desc;
+      copy.classList.remove('is-leaving');
+      copy.classList.add('is-entering');
+
+      featureCopyAnimationFrame = requestAnimationFrame(() => {
+        featureCopyAnimationTimer = setTimeout(() => {
+          copy.classList.remove('is-entering');
+        }, 320);
+      });
+    }, 220);
+  }, copyLeaveDelayMs);
+}
+
+function updateFeature(index, options = {}) {
+  const { immediate = false } = options;
   currentFeature = index;
   const feature = window.features[index];
 
-  document.getElementById('feature-title').textContent = feature.title;
-  document.getElementById('feature-desc').textContent = feature.desc;
+  animateFeatureCopy(feature, immediate);
 
   document.querySelectorAll('.feature-tab').forEach((tab, i) => {
     if (i === index) {
@@ -30,12 +104,25 @@ function updateFeature(index) {
     nextBtn.classList.remove('disabled');
   }
 
-  loadFeatureImage(feature.imagePath, feature.title);
+  updateFeatureCarousel(index, immediate);
 }
 
-function loadFeatureImage(imagePath, title) {
-  const imageContainer = document.getElementById('feature-image');
-  imageContainer.innerHTML = `<img src="${imagePath}" alt="${title}" />`;
+function updateFeatureCarousel(index, immediate = false) {
+  const track = document.getElementById('feature-carousel-track');
+  if (!track) {
+    return;
+  }
+
+  if (immediate) {
+    const previousTransition = track.style.transition;
+    track.style.transition = 'none';
+    track.style.transform = `translateX(-${index * 100}%)`;
+    track.offsetHeight;
+    track.style.transition = previousTransition || '';
+    return;
+  }
+
+  track.style.transform = `translateX(-${index * 100}%)`;
 }
 
 function switchFloatPanel(panelName) {
@@ -46,6 +133,7 @@ function switchFloatPanel(panelName) {
   const mainPanel = document.getElementById('main-panel');
   const floatingWindow = document.querySelector('.floating-window');
 
+  mainPanel.style.display = 'block';
   managerPanel.style.display = 'none';
   buyerPanel.classList.remove('active');
   successPanel.classList.remove('active');
@@ -84,7 +172,80 @@ function hideError(input) {
   input.classList.remove('error');
 }
 
+function openHeroIntroVideoModal() {
+  const modal = document.getElementById('hero-video-modal');
+  const video = document.getElementById('hero-intro-video');
+  if (!modal) {
+    return;
+  }
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (!video) {
+    return;
+  }
+
+  const playWithAutoplayPolicyFallback = () => {
+    video.muted = false;
+    const attempt = video.play();
+    if (attempt === undefined) {
+      return;
+    }
+    return attempt.catch(() => {
+      video.muted = true;
+      return video.play();
+    }).catch(() => {});
+  };
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(playWithAutoplayPolicyFallback);
+  });
+}
+
+function closeHeroIntroVideoModal() {
+  const modal = document.getElementById('hero-video-modal');
+  const video = document.getElementById('hero-intro-video');
+  if (!modal) {
+    return;
+  }
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+    video.muted = false;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  buildFeatureCarousel();
+
+  const supplierRows = document.querySelectorAll('#supplier-section .supplier-brand-row');
+  if (supplierRows.length && 'IntersectionObserver' in window) {
+    supplierRows.forEach(row => row.classList.add('supplier-brand-row--scroll-reveal'));
+
+    const rowObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-row-visible');
+            return;
+          }
+          const rect = entry.boundingClientRect;
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+          const vw = window.innerWidth || document.documentElement.clientWidth;
+          if (rect.bottom < 0 || rect.top > vh || rect.right < 0 || rect.left > vw) {
+            entry.target.classList.remove('is-row-visible');
+          }
+        });
+      },
+      { threshold: 0, rootMargin: '0px' }
+    );
+
+    supplierRows.forEach(row => rowObserver.observe(row));
+  }
+
   document.querySelectorAll('.feature-tab').forEach((tab, index) => {
     tab.addEventListener('click', () => {
       updateFeature(index);
@@ -150,14 +311,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const floatCloseBtn = document.getElementById('float-close-btn');
-  const floatingWindow = document.querySelector('.floating-window');
   const floatForm = document.getElementById('float-form');
   const floatName = document.getElementById('float-name');
   const floatPhone = document.getElementById('float-phone');
   const floatCompany = document.getElementById('float-company');
+  const mainPanel = document.getElementById('main-panel');
+  const floatingWindow = document.querySelector('.floating-window');
 
   floatCloseBtn.addEventListener('click', () => {
-    floatingWindow.style.display = 'none';
+    mainPanel.style.display = 'none';
+    floatingWindow?.classList.remove('phone-consult-active');
   });
 
   floatName.addEventListener('input', () => {
@@ -221,6 +384,42 @@ document.addEventListener('DOMContentLoaded', () => {
     switchFloatPanel('phone-consult');
   });
 
-  updateFeature(0);
+  const heroPlatformIntroBtn = document.getElementById('hero-platform-intro-btn');
+  const heroVideoModal = document.getElementById('hero-video-modal');
+  const heroVideoModalClose = document.getElementById('hero-video-modal-close');
+
+  heroPlatformIntroBtn?.addEventListener('click', () => {
+    openHeroIntroVideoModal();
+  });
+
+  heroVideoModalClose?.addEventListener('click', () => {
+    closeHeroIntroVideoModal();
+  });
+
+  heroVideoModal?.addEventListener('click', e => {
+    if (e.target === heroVideoModal) {
+      closeHeroIntroVideoModal();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') {
+      return;
+    }
+    if (document.getElementById('hero-video-modal')?.classList.contains('show')) {
+      closeHeroIntroVideoModal();
+    }
+  });
+
+  const heroIntroAutoOpenDelayMs = 3000;
+  setTimeout(() => {
+    const modal = document.getElementById('hero-video-modal');
+    if (!modal || modal.classList.contains('show')) {
+      return;
+    }
+    openHeroIntroVideoModal();
+  }, heroIntroAutoOpenDelayMs);
+
+  updateFeature(0, { immediate: true });
   switchFloatPanel('manager');
 });

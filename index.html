@@ -49,10 +49,10 @@
             <span>立即体验</span>
             <img src="./asset/icons/svg_hero_left_arrow.svg" class="hero-arrow-icon" alt="箭头" />
           </a>
-          <a href="https://mp.weixin.qq.com/s/OjVWp-ICxL6fsgDLC_VAnQ" target="_blank" class="btn-secondary link-reset">
+          <button type="button" class="btn-secondary hero-platform-intro-btn" id="hero-platform-intro-btn">
             <span>平台介绍</span>
-            <img src="./asset/icons/svg_hero_right_arrow.svg" class="hero-arrow-icon" alt="箭头" />
-          </a>
+            <img src="./asset/icons/svg_hero_right_arrow.svg" class="hero-arrow-icon" alt="" aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>
@@ -222,9 +222,7 @@
             <div class="phone-consult-info">
               <div class="phone-consult-header">
                 <div class="phone-consult-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M1.9108081 4.29C0.61898273 4.29 -0.31406245 5.4899351 0.098947778 6.7139848C0.9472177 9.2279344 2.5623174 13.130283 5.0357685 15.603684C7.5091677 18.077134 11.411517 19.692233 13.925467 20.540486C15.149516 20.953534 16.349464 20.020483 16.349464 18.728634V16.191884C16.349464 15.828835 16.152664 15.494286 15.835373 15.317886L13.62572 14.089386C13.33712 13.928935 12.987918 13.921286 12.692569 14.068983L10.33612 15.247185C10.33612 15.247185 8.5862684 14.911583 7.1570692 13.482384C5.7278686 12.053183 5.3863692 10.297435 5.3863692 10.297435L6.5647683 7.9406355C6.7123179 7.645485 6.7048178 7.2965348 6.5446677 7.0080347L5.3214169 4.80463C5.1451182 4.4870096 4.8104186 4.29 4.4471192 4.29H1.9108081Z" fill="#000000"/>
-                  </svg>
+                  <img src="./asset/icons/svg_06b30892.svg" class="phone-consult-icon-image" alt="电话咨询" />
                 </div>
                 <div class="phone-consult-label">电话咨询</div>
               </div>
@@ -238,58 +236,18 @@
       <div class="float-capsule-buttons">
         <div class="float-capsule-item">
           <button class="float-capsule-btn" id="phone-consult-btn">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-              <g transform="translate(2.25, 3.42)">
-                <!-- 外圈弧线 -->
-                <path d="M0.74180788 0.086929023Q2.2857966 -0.14322156 3.7980025 0.23596734Q5.8802242 0.7580952 7.4056644 2.2835286Q8.9311972 3.8090608 9.4532595 5.8912659Q9.8324566 7.4034333 9.6022911 8.9473963C9.5412197 9.3570843 9.1595917 9.6396923 8.7499046 9.578619C8.3402166 9.5175457 8.0576105 9.1359177 8.1186857 8.7262297Q8.3047438 7.4781318 7.9982939 6.256062Q7.582077 4.5960097 6.3737736 3.3731306C6.3541923 3.3533123 6.3358874 3.3350077 6.3160691 3.3154259Q5.0932608 2.1071999 3.4331691 1.6909235Q2.2110977 1.3844864 0.96295798 1.5705371C0.55326974 1.631608 0.17164464 1.348997 0.11057553 0.93930858C0.04950643 0.52962017 0.33211926 0.14799625 0.74180788 0.086929023Z" fill="#3069F9"/>
-                <!-- 内圈渐变弧线 -->
-                <path d="M11.74180615 3.965025826Q12.6668108 3.827128215 13.5557716 4.11156027Q14.4756718 4.40589182 15.1625371 5.0927085Q15.8493857 5.7795579 16.1437011 6.6994893Q16.4280996 7.5884229 16.2902045 8.5134691C16.229135 8.9231576 15.8475094 9.2057676 15.4378214 9.1446962C15.0281334 9.0836248 14.7455246 8.7019977 14.8065982 8.2923102Q14.8929877 7.7127799 14.7150366 7.1565649Q14.5315478 6.5830402 14.1019142 6.1534061Q13.6722012 5.7237236 13.0986593 5.540213Q12.5424417 5.3622455 11.96297866 5.4486305C11.55329144 5.5097076 11.17166203 5.2271023 11.11058673 4.8174148C11.049511429 4.40772734 11.33211842 4.02609926 11.74180615 3.965025826Z" fill="url(#paint0_linear_phone)"/>
-                <!-- 电话听筒主体 -->
-                <path d="M2.0700421 2.44C0.67056465 2.44 -0.34023431 3.7399296 0.10719343 5.0659835C1.0261525 7.7894287 2.7758439 12.0169739 5.4554157 14.696491C8.1349316 17.376062 12.362477 19.125753 15.085923 20.044692C16.411976 20.492162 17.71192 19.481357 17.71192 18.081853V15.333707C17.71192 14.940404 17.49872 14.577976 17.154987 14.386877L14.761196 13.056001C14.448546 12.88218 14.070245 12.873892 13.750282 13.033898L11.197463 14.310283C11.197463 14.310283 9.3017902 13.946715 7.7534914 12.398416C6.2051907 10.850115 5.8352332 8.9480543 5.8352332 8.9480543L7.1118321 6.394855C7.2716775 6.0751087 7.2635527 5.6970794 7.0900569 5.3845376L5.7648683 2.99751568C5.5738778 2.65342704 5.2112865 2.44 4.8177123 2.44H2.0700421Z" fill="#3069F9"/>
-              </g>
-              <defs>
-                <linearGradient id="paint0_linear_phone" x1="11" y1="3.92" x2="16.64" y2="9.37" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#3069F9"/>
-                  <stop offset="1" stop-color="#3069F9" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src="./asset/icons/svg_06b30892.svg" class="float-capsule-phone-icon" alt="电话咨询" />
           </button>
           <div class="float-capsule-text">电话咨询</div>
         </div>
 
-        <div class="float-capsule-divider"></div>
+        <img src="./asset/icons/svg_7c4cdadf.svg" class="float-capsule-divider-image" alt="" aria-hidden="true" />
 
         <div class="float-capsule-item">
           <button class="float-capsule-btn" id="trial-btn">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-              <g transform="translate(1.12, 2.54)">
-                <g transform="translate(2.91, 0)">
-                  <!-- 文档背景 -->
-                  <rect width="17.46" height="20.92" rx="3.64" fill="#3069F9"/>
-                  <!-- 文本行1 -->
-                  <rect x="4" y="4.64" width="9.46" height="1.82" rx="0.91" fill="url(#paint0_linear_trial)"/>
-                  <!-- 文本行2 -->
-                  <rect x="4" y="9" width="5.46" height="1.82" rx="0.91" fill="url(#paint1_linear_trial)"/>
-                  <!-- 箭头 -->
-                  <path d="M14.64 13.83L9.79 19.02C9.69 19.13 9.64 19.27 9.64 19.42C9.64 19.57 9.69 19.71 9.79 19.82L10.11 20.16C10.21 20.27 10.35 20.32 10.5 20.32C10.65 20.32 10.79 20.27 10.9 20.16L16.85 13.83C16.96 13.72 17.01 13.58 17.01 13.43C17.01 13.28 16.96 13.14 16.85 13.03L10.9 6.7C10.79 6.59 10.65 6.54 10.5 6.54C10.35 6.54 10.21 6.59 10.11 6.7L9.79 7.04C9.69 7.15 9.64 7.29 9.64 7.44C9.64 7.59 9.69 7.73 9.79 7.84L14.64 13.03C14.75 13.14 14.75 13.28 14.75 13.43C14.75 13.58 14.75 13.72 14.64 13.83Z" fill="url(#paint2_linear_trial)"/>
-                </g>
-              </g>
-              <defs>
-                <linearGradient id="paint0_linear_trial" x1="4" y1="4.64" x2="13.46" y2="5.55" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#F0F7FF" stop-opacity="0.71"/>
-                  <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.84"/>
-                </linearGradient>
-                <linearGradient id="paint1_linear_trial" x1="4" y1="9" x2="9.46" y2="9.82" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#F0F7FF" stop-opacity="0.71"/>
-                  <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.84"/>
-                </linearGradient>
-                <linearGradient id="paint2_linear_trial" x1="9.64" y1="6.54" x2="17.01" y2="20.32" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#3069F9"/>
-                  <stop offset="1" stop-color="#F5F8FF"/>
-                </linearGradient>
-              </defs>
-            </svg>
+            <span class="float-capsule-trial-icon-wrap">
+              <img src="./asset/icons/svg_067db732.svg" class="float-capsule-trial-icon" alt="申请试用" />
+            </span>
           </button>
           <div class="float-capsule-text">申请试用</div>
         </div>
@@ -302,6 +260,27 @@
         <div class="phone-popup-title">电话咨询</div>
         <div class="phone-popup-number">400-920-5856</div>
         <button class="phone-popup-close" id="phone-popup-close">关闭</button>
+      </div>
+    </div>
+
+    <!-- 平台介绍视频弹窗（无标题栏、视频贴边，关闭钮叠在画面角上） -->
+    <div class="hero-video-modal" id="hero-video-modal" aria-hidden="true">
+      <div class="hero-video-modal__panel" role="dialog" aria-modal="true" aria-label="平台介绍视频">
+        <div class="hero-video-modal__frame">
+          <button type="button" class="hero-video-modal__close" id="hero-video-modal-close" aria-label="关闭">
+            <span class="hero-video-modal__close-x" aria-hidden="true">×</span>
+          </button>
+          <video
+            id="hero-intro-video"
+            class="hero-video-modal__video"
+            controls
+            playsinline
+            preload="auto"
+            src="./asset/videos/锐竞采购平台介绍视频.mp4"
+          >
+            您的浏览器不支持视频播放。
+          </video>
+        </div>
       </div>
     </div>
 
@@ -340,7 +319,7 @@
 
       <div class="feature-card">
         <div class="feature-info">
-          <div>
+          <div class="feature-copy" id="feature-copy">
             <h2 id="feature-title">全链路闭环</h2>
             <p id="feature-desc">实时掌控经费使用进度，采购全流程数据留痕可追溯，助力实现降本增效。</p>
           </div>
@@ -354,7 +333,9 @@
           </div>
         </div>
         <div class="feature-image" id="feature-image">
-          <img src="./asset/images/全链路闭环.png" alt="全链路闭环" />
+          <div class="feature-carousel" id="feature-carousel">
+            <div class="feature-carousel-track" id="feature-carousel-track"></div>
+          </div>
         </div>
       </div>
     </section>
