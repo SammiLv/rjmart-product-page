@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>锐竞采购平台</title>
+  <link rel="stylesheet" href="./styles/base.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- 头部导航 -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-nav">
+          <div>
+            <a href="https://www.rjmart.cn/" target="_blank" class="logo-link">
+              <img src="./asset/icons/svg_069f43d7.svg" class="brand-logo" alt="锐竞采购平台" />
+            </a>
+          </div>
+          <nav class="nav-links">
+            <a href="#platform-features" class="nav-link">平台优势</a>
+            <a href="#customer-section" class="nav-link">客户代表</a>
+            <a href="#supplier-section" class="nav-link">入驻供应商</a>
+            <a href="#certification-section" class="nav-link">实力认证</a>
+            <a href="https://www.rjmart.net/" target="_blank" class="nav-link">关于锐竞</a>
+          </nav>
+        </div>
+        <div class="header-right">
+          <div class="phone">
+            <img src="./asset/icons/svg_06b30892.svg" class="phone-icon" alt="电话" />
+            <span>020-3195-6719</span>
+          </div>
+          <div class="auth-buttons">
+            <a href="https://www.rjmart.cn/signup?registerType=1" target="_blank" class="btn-register link-reset">注册</a>
+            <a href="https://www.rjmart.cn/Login" target="_blank" class="btn-login link-reset">登录</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero区域 -->
+    <section class="hero">
+      <img src="./asset/images/2719b3e33a689b1fbf8936a420e613a2.png" class="hero-bg" alt="背景" />
+      <div class="hero-content">
+        <h1 class="hero-title">锐竞采购平台</h1>
+        <p class="hero-subtitle">科研物资采购全流程数字化、智能化、规范化管理</p>
+        <div class="hero-buttons">
+          <a href="https://www.rjmart.cn/" target="_blank" class="btn-primary link-reset">
+            <span>立即体验</span>
+            <img src="./asset/icons/svg_hero_left_arrow.svg" class="hero-arrow-icon" alt="箭头" />
+          </a>
+          <a href="https://mp.weixin.qq.com/s/OjVWp-ICxL6fsgDLC_VAnQ" target="_blank" class="btn-secondary link-reset">
+            <span>平台介绍</span>
+            <img src="./asset/icons/svg_hero_right_arrow.svg" class="hero-arrow-icon" alt="箭头" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 统计数据条 -->
+    <div class="stats-bar">
+      <div class="stats-bar-content">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <img src="./asset/images/3eb939e16cb990d3c353a13c28d0bb46.png" class="stat-sprite stat-sprite-1" alt="图标" />
+          </div>
+          <div class="stat-text">
+            <h3>200亿+</h3>
+            <p>平台流水</p>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <img src="./asset/images/3eb939e16cb990d3c353a13c28d0bb46.png" class="stat-sprite stat-sprite-2" alt="图标" />
+          </div>
+          <div class="stat-text">
+            <h3>3.5万+</h3>
+            <p>优质供应商</p>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <img src="./asset/images/3eb939e16cb990d3c353a13c28d0bb46.png" class="stat-sprite stat-sprite-3" alt="图标" />
+          </div>
+          <div class="stat-text">
+            <h3>1.8亿+</h3>
+            <p>商品</p>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <img src="./asset/images/3eb939e16cb990d3c353a13c28d0bb46.png" class="stat-sprite stat-sprite-4" alt="图标" />
+          </div>
+          <div class="stat-text">
+            <h3>500+</h3>
+            <p>采购单位</p>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <img src="./asset/images/3eb939e16cb990d3c353a13c28d0bb46.png" class="stat-sprite stat-sprite-5" alt="图标" />
+          </div>
+          <div class="stat-text">
+            <h3>50万+</h3>
+            <p>科研人员</p>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <img src="./asset/images/3eb939e16cb990d3c353a13c28d0bb46.png" class="stat-sprite stat-sprite-6" alt="图标" />
+          </div>
+          <div class="stat-text">
+            <h3>4800+</h3>
+            <p>品牌厂家</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧浮窗 -->
+    <div class="floating-window">
+      <!-- 主表单面板 -->
+      <div class="float-form-panel" id="main-panel">
+        <!-- 背景装饰 -->
+        <div class="float-bg-decoration float-bg-circle1"></div>
+        <div class="float-bg-decoration float-bg-circle2"></div>
+
+        <!-- 关闭按钮 -->
+        <button class="float-close-btn" id="float-close-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9.24887 0.219943C9.54176 0.512837 9.54175 0.987716 9.24884 1.28059L5.79413 4.7349L9.24885 8.18922C9.54175 8.4821 9.54177 8.95697 9.24888 9.24986C8.95599 9.54274 8.48112 9.54273 8.18825 9.24982L4.73393 5.7951L1.27962 9.24981C0.98674 9.54272 0.51186 9.54274 0.218966 9.24984C-0.0739195 8.95696 -0.0739147 8.48209 0.218977 8.18921L3.67343 4.7349L0.218987 1.2806C-0.0739103 0.987717 -0.0739151 0.512844 0.218976 0.219953C0.511868 -0.0729385 0.98674 -0.0729337 1.27963 0.219964L4.73393 3.6744L8.18824 0.219954C8.48112 -0.0729381 8.95598 -0.0729429 9.24887 0.219943Z" fill="rgba(0, 0, 0, 0.45)"/>
+          </svg>
+        </button>
+
+        <!-- 管理人员表单内容 -->
+        <div class="float-form-content" id="manager-form-content">
+          <!-- 标题 -->
+          <div class="float-header">
+            <div class="float-title">免费使用</div>
+            <div class="float-subtitle">填写联系信息，即可申请单位免费入驻</div>
+          </div>
+
+          <!-- Tab切换 -->
+          <div class="float-tabs">
+            <div class="float-tab manager" data-tab="manager">管理人员</div>
+            <div class="float-tab buyer" data-tab="buyer">采购人员</div>
+          </div>
+
+          <!-- 表单 -->
+          <form class="float-form" id="float-form">
+            <div class="float-input-wrapper">
+              <input type="text" class="float-input" id="float-name" placeholder="姓名（必填）" required />
+              <span class="float-error-msg">请输入姓名</span>
+            </div>
+            <div class="float-input-wrapper">
+              <input type="tel" class="float-input" id="float-phone" placeholder="电话（必填）" required />
+              <span class="float-error-msg">请输入正确的电话号码</span>
+            </div>
+            <div class="float-input-wrapper">
+              <input type="text" class="float-input" id="float-company" placeholder="单位名称（必填）" required />
+              <span class="float-error-msg">请输入单位名称</span>
+            </div>
+            <div class="float-input-wrapper">
+              <textarea class="float-textarea" id="float-message" placeholder="留言内容（选填）"></textarea>
+            </div>
+            <button type="submit" class="float-submit-btn">提交您的申请</button>
+          </form>
+        </div>
+
+        <!-- 采购人员内容 -->
+        <div class="float-form-content buyer-panel" id="buyer-panel-content">
+          <div class="float-header">
+            <div class="float-title">免费使用</div>
+            <div class="float-subtitle">填写联系信息，即可申请单位免费入驻</div>
+          </div>
+
+          <div class="float-tabs">
+            <div class="float-tab buyer" data-tab="manager-back">管理人员</div>
+            <div class="float-tab manager" data-tab="buyer">采购人员</div>
+          </div>
+
+          <div class="buyer-content">
+            <div class="buyer-icon"></div>
+            <div class="buyer-text">直接注册，立即开始采购</div>
+            <button class="buyer-register-btn" id="buyer-register-btn">前往平台注册</button>
+          </div>
+        </div>
+
+        <!-- 提交成功内容 -->
+        <div class="float-form-content success-panel" id="success-panel-content">
+          <div class="float-header">
+            <div class="float-title">免费使用</div>
+            <div class="float-subtitle">填写联系信息，即可申请单位免费入驻</div>
+          </div>
+
+          <div class="float-tabs">
+            <div class="float-tab manager" data-tab="manager">管理人员</div>
+            <div class="float-tab buyer" data-tab="buyer">采购人员</div>
+          </div>
+
+          <div class="success-content">
+            <div class="success-icon-wrapper">
+              <div class="success-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 4C12.96 4 4 12.96 4 24C4 35.04 12.96 44 24 44C35.04 44 44 35.04 44 24C44 12.96 35.04 4 24 4ZM19.6 34L9.6 24L12.44 21.16L19.6 28.3L35.56 12.34L38.4 15.18L19.6 34Z" fill="#19BE6B"/>
+                </svg>
+              </div>
+              <div class="success-title">提交成功</div>
+            </div>
+            <div class="success-subtitle">请耐心等候，我们会尽快和您联系</div>
+          </div>
+        </div>
+
+        <!-- 电话咨询内容 -->
+        <div class="phone-consult-panel" id="phone-consult-panel-content">
+          <div class="phone-consult-content">
+            <div class="phone-consult-info">
+              <div class="phone-consult-header">
+                <div class="phone-consult-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M1.9108081 4.29C0.61898273 4.29 -0.31406245 5.4899351 0.098947778 6.7139848C0.9472177 9.2279344 2.5623174 13.130283 5.0357685 15.603684C7.5091677 18.077134 11.411517 19.692233 13.925467 20.540486C15.149516 20.953534 16.349464 20.020483 16.349464 18.728634V16.191884C16.349464 15.828835 16.152664 15.494286 15.835373 15.317886L13.62572 14.089386C13.33712 13.928935 12.987918 13.921286 12.692569 14.068983L10.33612 15.247185C10.33612 15.247185 8.5862684 14.911583 7.1570692 13.482384C5.7278686 12.053183 5.3863692 10.297435 5.3863692 10.297435L6.5647683 7.9406355C6.7123179 7.645485 6.7048178 7.2965348 6.5446677 7.0080347L5.3214169 4.80463C5.1451182 4.4870096 4.8104186 4.29 4.4471192 4.29H1.9108081Z" fill="#000000"/>
+                  </svg>
+                </div>
+                <div class="phone-consult-label">电话咨询</div>
+              </div>
+              <div class="phone-consult-number">020-3195-6719</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 胶囊按钮组 -->
+      <div class="float-capsule-buttons">
+        <div class="float-capsule-item">
+          <button class="float-capsule-btn" id="phone-consult-btn">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <g transform="translate(2.25, 3.42)">
+                <!-- 外圈弧线 -->
+                <path d="M0.74180788 0.086929023Q2.2857966 -0.14322156 3.7980025 0.23596734Q5.8802242 0.7580952 7.4056644 2.2835286Q8.9311972 3.8090608 9.4532595 5.8912659Q9.8324566 7.4034333 9.6022911 8.9473963C9.5412197 9.3570843 9.1595917 9.6396923 8.7499046 9.578619C8.3402166 9.5175457 8.0576105 9.1359177 8.1186857 8.7262297Q8.3047438 7.4781318 7.9982939 6.256062Q7.582077 4.5960097 6.3737736 3.3731306C6.3541923 3.3533123 6.3358874 3.3350077 6.3160691 3.3154259Q5.0932608 2.1071999 3.4331691 1.6909235Q2.2110977 1.3844864 0.96295798 1.5705371C0.55326974 1.631608 0.17164464 1.348997 0.11057553 0.93930858C0.04950643 0.52962017 0.33211926 0.14799625 0.74180788 0.086929023Z" fill="#3069F9"/>
+                <!-- 内圈渐变弧线 -->
+                <path d="M11.74180615 3.965025826Q12.6668108 3.827128215 13.5557716 4.11156027Q14.4756718 4.40589182 15.1625371 5.0927085Q15.8493857 5.7795579 16.1437011 6.6994893Q16.4280996 7.5884229 16.2902045 8.5134691C16.229135 8.9231576 15.8475094 9.2057676 15.4378214 9.1446962C15.0281334 9.0836248 14.7455246 8.7019977 14.8065982 8.2923102Q14.8929877 7.7127799 14.7150366 7.1565649Q14.5315478 6.5830402 14.1019142 6.1534061Q13.6722012 5.7237236 13.0986593 5.540213Q12.5424417 5.3622455 11.96297866 5.4486305C11.55329144 5.5097076 11.17166203 5.2271023 11.11058673 4.8174148C11.049511429 4.40772734 11.33211842 4.02609926 11.74180615 3.965025826Z" fill="url(#paint0_linear_phone)"/>
+                <!-- 电话听筒主体 -->
+                <path d="M2.0700421 2.44C0.67056465 2.44 -0.34023431 3.7399296 0.10719343 5.0659835C1.0261525 7.7894287 2.7758439 12.0169739 5.4554157 14.696491C8.1349316 17.376062 12.362477 19.125753 15.085923 20.044692C16.411976 20.492162 17.71192 19.481357 17.71192 18.081853V15.333707C17.71192 14.940404 17.49872 14.577976 17.154987 14.386877L14.761196 13.056001C14.448546 12.88218 14.070245 12.873892 13.750282 13.033898L11.197463 14.310283C11.197463 14.310283 9.3017902 13.946715 7.7534914 12.398416C6.2051907 10.850115 5.8352332 8.9480543 5.8352332 8.9480543L7.1118321 6.394855C7.2716775 6.0751087 7.2635527 5.6970794 7.0900569 5.3845376L5.7648683 2.99751568C5.5738778 2.65342704 5.2112865 2.44 4.8177123 2.44H2.0700421Z" fill="#3069F9"/>
+              </g>
+              <defs>
+                <linearGradient id="paint0_linear_phone" x1="11" y1="3.92" x2="16.64" y2="9.37" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3069F9"/>
+                  <stop offset="1" stop-color="#3069F9" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </button>
+          <div class="float-capsule-text">电话咨询</div>
+        </div>
+
+        <div class="float-capsule-divider"></div>
+
+        <div class="float-capsule-item">
+          <button class="float-capsule-btn" id="trial-btn">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <g transform="translate(1.12, 2.54)">
+                <g transform="translate(2.91, 0)">
+                  <!-- 文档背景 -->
+                  <rect width="17.46" height="20.92" rx="3.64" fill="#3069F9"/>
+                  <!-- 文本行1 -->
+                  <rect x="4" y="4.64" width="9.46" height="1.82" rx="0.91" fill="url(#paint0_linear_trial)"/>
+                  <!-- 文本行2 -->
+                  <rect x="4" y="9" width="5.46" height="1.82" rx="0.91" fill="url(#paint1_linear_trial)"/>
+                  <!-- 箭头 -->
+                  <path d="M14.64 13.83L9.79 19.02C9.69 19.13 9.64 19.27 9.64 19.42C9.64 19.57 9.69 19.71 9.79 19.82L10.11 20.16C10.21 20.27 10.35 20.32 10.5 20.32C10.65 20.32 10.79 20.27 10.9 20.16L16.85 13.83C16.96 13.72 17.01 13.58 17.01 13.43C17.01 13.28 16.96 13.14 16.85 13.03L10.9 6.7C10.79 6.59 10.65 6.54 10.5 6.54C10.35 6.54 10.21 6.59 10.11 6.7L9.79 7.04C9.69 7.15 9.64 7.29 9.64 7.44C9.64 7.59 9.69 7.73 9.79 7.84L14.64 13.03C14.75 13.14 14.75 13.28 14.75 13.43C14.75 13.58 14.75 13.72 14.64 13.83Z" fill="url(#paint2_linear_trial)"/>
+                </g>
+              </g>
+              <defs>
+                <linearGradient id="paint0_linear_trial" x1="4" y1="4.64" x2="13.46" y2="5.55" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#F0F7FF" stop-opacity="0.71"/>
+                  <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.84"/>
+                </linearGradient>
+                <linearGradient id="paint1_linear_trial" x1="4" y1="9" x2="9.46" y2="9.82" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#F0F7FF" stop-opacity="0.71"/>
+                  <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.84"/>
+                </linearGradient>
+                <linearGradient id="paint2_linear_trial" x1="9.64" y1="6.54" x2="17.01" y2="20.32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3069F9"/>
+                  <stop offset="1" stop-color="#F5F8FF"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </button>
+          <div class="float-capsule-text">申请试用</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 电话咨询弹窗 -->
+    <div class="phone-popup" id="phone-popup">
+      <div class="phone-popup-content">
+        <div class="phone-popup-title">电话咨询</div>
+        <div class="phone-popup-number">400-920-5856</div>
+        <button class="phone-popup-close" id="phone-popup-close">关闭</button>
+      </div>
+    </div>
+
+    <!-- 功能导航区 -->
+    <section class="features-section" id="platform-features">
+      <div class="feature-tabs">
+        <div class="feature-tab active" data-feature="0">
+          <img src="./asset/icons/svg_e5fe898e.svg" alt="全链路闭环" />
+          <span>全链路闭环</span>
+        </div>
+        <div class="feature-tab" data-feature="1">
+          <img src="./asset/icons/svg_d5ce6369.svg" alt="移动端审批" />
+          <span>移动端审批</span>
+        </div>
+        <div class="feature-tab" data-feature="2">
+          <img src="./asset/icons/svg_d8005b48.svg" alt="竞价询价" />
+          <span>竞价询价</span>
+        </div>
+        <div class="feature-tab" data-feature="3">
+          <img src="./asset/icons/svg_da78102b.svg" alt="无纸化报销" />
+          <span>无纸化报销</span>
+        </div>
+        <div class="feature-tab" data-feature="4">
+          <img src="./asset/icons/svg_dcaa080a.svg" alt="审批流定制" />
+          <span>审批流定制</span>
+        </div>
+        <div class="feature-tab" data-feature="5">
+          <img src="./asset/icons/svg_f1c363e5.svg" alt="系统对接" />
+          <span>系统对接</span>
+        </div>
+        <div class="feature-tab" data-feature="6">
+          <img src="./asset/icons/svg_f3f55bc4.svg" alt="危化品管理" />
+          <span>危化品管理</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-info">
+          <div>
+            <h2 id="feature-title">全链路闭环</h2>
+            <p id="feature-desc">实时掌控经费使用进度，采购全流程数据留痕可追溯，助力实现降本增效。</p>
+          </div>
+          <div class="feature-nav-buttons">
+            <div class="nav-btn disabled" id="prev-btn">
+              <img src="./asset/icons/svg_e186ea07.svg" class="nav-arrow-icon nav-arrow-icon--prev" alt="上一个" />
+            </div>
+            <div class="nav-btn" id="next-btn">
+              <img src="./asset/icons/svg_e186ea07.svg" class="nav-arrow-icon" alt="下一个" />
+            </div>
+          </div>
+        </div>
+        <div class="feature-image" id="feature-image">
+          <img src="./asset/images/全链路闭环.png" alt="全链路闭环" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 客户代表区域 -->
+    <section id="customer-section" style="display: flex; justify-content: flex-start; align-items: center; flex-direction: column; gap: 48px; padding-top: 40px;">
+      <span style="color: #0C0D0E; font-size: 40px; font-family: PingFang SC; font-weight: 500; line-height: 60px;">客户代表</span>
+      <div style="width: 1920px; height: 852px; flex: none; position: relative;">
+        <div style="width: 1920px; height: 818px; flex: none; position: absolute; left: 0px; top: 34px; z-index: 0;">
+          <img src="./asset/images/24d92bf38ad6e90e98cdb45c10b36dd3.png" title="矩形 62" style="flex: none; position: absolute; left: 140px; top: 217px; z-index: 1; width: 1780px; height: 737px; object-fit: cover" />
+          <div style="width: 1920px; height: 755px; flex: none; background: linear-gradient(181deg, #FFFFFF 0%, #E6F0FF 44%, rgba(255,255,255,0) 100%); position: absolute; left: 0px; top: 63px; z-index: 2;"></div>
+          <div style="width: 1317px; height: 802px; flex: none; background: linear-gradient(108deg, #FFFFFF 0%, rgba(255,255,255,0) 100%, rgba(255,255,255,0) 100%); position: absolute; left: 0px; top: 16px; z-index: 3;"></div>
+        </div>
+        <div style="width: 1232px; height: 818px; flex: none; position: absolute; left: 344px; top: 0px; z-index: 1;">
+          <div style="width: 320px; height: 374px; flex: none; background: #FFFFFF; position: absolute; left: 873px; top: 425px; z-index: 1;"></div>
+          <div style="width: 130px; height: 222px; flex: none; background: #FFFFFF; position: absolute; left: 297px; top: 536px; z-index: 2;"></div>
+          <div style="width: 258px; height: 190px; flex: none; background: #FFFFFF; position: absolute; left: 297px; top: 568px; z-index: 3;"></div>
+          <div style="width: 258px; height: 291px; flex: none; background: #FFFFFF; position: absolute; left: 39px; top: 467px; z-index: 4;"></div>
+          <div style="width: 320px; height: 184px; flex: none; background: #FFFFFF; position: absolute; left: 873px; top: 34px; z-index: 5;"></div>
+          <div style="width: 320px; height: 143px; flex: none; background: #FFFFFF; position: absolute; left: 873px; top: 250px; z-index: 6;"></div>
+          <div style="width: 182px; height: 239px; flex: none; background: #FFFFFF; position: absolute; left: 39px; top: 186px; z-index: 7;"></div>
+          <img src="./asset/images/29f3bbb7d2d276ce3cf586221c9dc9c2.png" title="资源 7@300x" style="flex: none; position: absolute; left: 39px; top: 19px; z-index: 8; width: 1154px; height: 780px; object-fit: cover" />
+          <div style="width: 555px; height: 56px; flex: none; background: #FFFFFF; position: absolute; left: 39px; top: 95px; z-index: 9;"></div>
+          <span style="position: absolute; left: 38px; top: 34px; z-index: 10;">
+            <span style="color: #495870; font-size: 18px; font-family: PingFang SC; line-height: 32px;">目前锐竞科研生态产品使用单位代表已覆盖全国</span>
+            <span style="color: #427BFF; font-size: 18px; font-family: PingFang SC; font-weight: 600; line-height: 32px;">27</span>
+            <span style="color: #495870; font-size: 18px; font-family: PingFang SC; line-height: 32px;">个省/直辖市，<br />使用单位</span>
+            <span style="color: #427BFF; font-size: 18px; font-family: PingFang SC; font-weight: 500; line-height: 32px;">500</span>
+            <span style="color: #495870; font-size: 18px; font-family: PingFang SC; line-height: 32px;">多家，涵盖高校、科研院所、医院等。</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 入驻供应商区域 -->
+    <section id="supplier-section" class="supplier-section">
+      <div class="supplier-stage">
+        <div class="supplier-stage-layer">
+          <div class="supplier-stage-layer">
+            <div class="supplier-stage-layer">
+              <img src="./asset/images/bed6c5d9e327fe053f908bda0a85f97e.png" title="jimeng-2026-02-28-1675-柔和渐变背景，虚化的建筑轮廓，光影流动，横版构图，高饱和度，细腻渐变，留白设计，..." class="supplier-stage-image" />
+            </div>
+          </div>
+        </div>
+        <div class="supplier-stage-backdrop"></div>
+      </div>
+      <div class="supplier-brand-group">
+        <div class="supplier-brand-heading">
+          <span class="supplier-brand-title">入驻供应商</span>
+          <span class="supplier-brand-desc">全平台 500+ 采购单位整体议价共享优惠价格，与头部 200+ 商家签订协议价格（4–9 折优惠）。</span>
+        </div>
+        <div class="supplier-brand-grid">
+          <div class="supplier-brand-row">
+            <div class="supplier-logo-card">
+              <img src="./asset/images/f73e2f1a041bc54a1525e1104da39fa9.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/414c98cd2922da76e80208afda2759df.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/63bdd1ba0f12b15691a488fd498a1643.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/28b0616cf3a1143e42f4c5556c20566c.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/ec1db71f625004ba42505c00cb9d2d3c.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/37f9e564ad1c8d241e46bd940a8522bf.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/d3fcb0528fd273cba869e4e918089c51.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/ce4fb75132be92e7ad9502540ce24ff8.png" title="矩形" class="supplier-logo-image" />
+            </div>
+          </div>
+          <div class="supplier-brand-row">
+            <div class="supplier-logo-card">
+              <img src="./asset/images/8abc076a37efc79b2da609cdb899a623.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/6a76c535bfde173c8c0e99a8c80fe584.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/855cd5bdec8fd194efb5720cea2ec0dd.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/745b9722b07695d207603a849d4f47d6.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/c1bf9e6d8343b51e20f684ea6ed7fefb.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/78c33c28a5db6328555abafa4793f197.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/9ee7056893e0f6d38f1b2a694793f84c.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/d27ed32641349edb666022c22a7455ac.png" title="矩形" class="supplier-logo-image" />
+            </div>
+          </div>
+          <div class="supplier-brand-row">
+            <div class="supplier-logo-card">
+              <img src="./asset/images/6af9203e78d73c6a4c23c68b34a7e800.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/e1e1f05fcdc4d06afb3b340d09315c17.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/60ebbe9fc993a612b2f87510ecf8499f.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/854fe8fd7c16313464916c800ae90a75.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/2d260b17cbcd17c4989f4dc9cde3ccc5.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div class="supplier-logo-card">
+              <img src="./asset/images/d4b8ca3c629e7d3ea554f47eab1eb773.png" title="矩形" class="supplier-logo-image" />
+            </div>
+            <div style="width: 125px; height: 50px; flex: none; background: #FFFFFF; border-style: solid; border-color: #EEEEEE; border-width: 0.5px; border-radius: 10px; box-shadow: 0px 2px 10px 0px rgba(48,105,249,0.06), 2px 2px 20px 0px rgba(0,45,106,0.06); overflow: hidden; position: relative;">
+              <img src="./asset/images/262682b7810b7166c2731aa69856cb11.png" title="矩形" class="supplier-logo-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="protocol-section">
+        <span class="protocol-title">协议价供应商</span>
+        <div class="protocol-card">
+          <div class="protocol-card-inner">
+            <div class="supplier-grid-overlay"></div>
+            <div class="protocol-grid">
+              <div class="protocol-row-stretch">
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">西格玛奥德里奇</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">安谱实验</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">君诺德生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">百赛生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">赛国生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">西域供应链</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">广誉科技</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">聚能慧达生物</span>
+                </div>
+              </div>
+              <div class="protocol-row-auto">
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">百灵威科技</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">新晋生物</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">英潍捷基</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">皓鸿生物</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">百俊科技</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">松鼠生物</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">誉维生物</span>
+                </div>
+                <div class="protocol-supplier-cell-fixed">
+                  <span class="protocol-supplier-name">吉满生物</span>
+                </div>
+              </div>
+              <div class="protocol-row-stretch">
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">艾康生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">达科为生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">毕得医药</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">皓歌生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">阿拉丁生化</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">凯联生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">狄尔格医药</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">瑞真生物</span>
+                </div>
+              </div>
+              <div style="display: flex; align-self: stretch; flex: 1; justify-content: flex-start; align-items: flex-start; filter: blur(8px); opacity: 0.32;">
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">鼎国生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">威佳科技</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">吉至生化</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">迪科马科技</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">伊诺凯科技</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">皓元生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">麦克林生化</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">蓝木化工</span>
+                </div>
+              </div>
+              <div style="display: flex; align-self: stretch; flex: 1; justify-content: flex-start; align-items: flex-start;">
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">弗得生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">义翘神州</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">聚研生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">晨学生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">安邦生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">迅益生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">优宁维生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">深圳瑞沃德</span>
+                </div>
+              </div>
+              <div style="display: flex; align-self: stretch; flex: 1; justify-content: center; align-items: flex-start;">
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">荣满生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">萨恩化学</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">陶术生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">基因生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">浩博世纪</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">韶远试剂</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">碳水生物</span>
+                </div>
+                <div class="protocol-supplier-cell">
+                  <span class="protocol-supplier-name">欣博盛生物</span>
+                </div>
+              </div>
+              <div style="display: flex; align-self: stretch; flex: 1; justify-content: center; align-items: flex-start;">
+                <div style="width: 148.5px; display: flex; flex: none; align-self: stretch; justify-content: center; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px;">
+                  <span class="protocol-supplier-name">海恩医疗</span>
+                </div>
+                <div style="width: 148.5px; display: flex; flex: none; align-self: stretch; justify-content: center; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px;">
+                  <span class="protocol-supplier-name">中乔新舟</span>
+                </div>
+                <div style="width: 148.5px; display: flex; flex: none; align-self: stretch; justify-content: center; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px;">
+                  <span class="protocol-supplier-name">拓山生物</span>
+                </div>
+                <div style="width: 148.5px; display: flex; flex: none; align-self: stretch; justify-content: center; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px;">
+                  <span class="protocol-supplier-name">联硕生物</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width: 1232px; height: 83px; flex: none; background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 10%, rgba(255, 255, 255, 0.1) 97%); backdrop-filter: blur(20px) saturate(100%); position: absolute; left: 0px; top: 219px; z-index: 1;"></div>
+          <div style="width: 125px; height: 39px; flex: none; background: rgba(255,255,255,0.1); border-style: solid; border-color: #FFFFFF; border-width: 1px; border-radius: 100px; box-shadow: 2px 2px 20px 0px rgba(0,45,106,0.06); position: absolute; left: 554px; top: 237px; z-index: 2; overflow: hidden;">
+            <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; position: absolute; left: 0; top: 0; z-index: 0;">
+              <span style="flex-shrink: 0; color: #0C0D0E; font-size: 14px; font-family: PingFang SC; line-height: 20px;">还有更多</span>
+              <div style="display: flex; align-items: center; transform: translateY(-1px); z-index: 1;">
+                <img src="./asset/icons/svg_df114d0b.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 实力认证区域 -->
+    <section id="certification-section" style="width: 100%; padding: 80px 0; display: flex; flex-direction: column; align-items: center; gap: 48px;">
+      <h2 style="color: #0C0D0E; font-size: 40px; font-weight: 500; margin: 0;">实力认证</h2>
+      <img src="./asset/images/f1564d09666a9493f077b5fd6b3a4d22.png"
+           style="width: 100%; max-width: 1111px; height: auto; object-fit: contain;"
+           alt="实力认证" />
+    </section>
+
+    <!-- 页脚区域 -->
+    <footer style="width: 100%; background: #F5F6F7; padding: 48px 0;">
+      <div style="width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; gap: 80px;">
+        <!-- 科研机构数字化工具 -->
+        <div class="footer-column">
+          <h3 class="footer-column-title">科研机构数字化工具</h3>
+          <ul class="footer-list">
+            <li class="footer-list-item">科研采购管理平台</li>
+            <li class="footer-list-item">科研管理系统</li>
+            <li class="footer-list-item">危化品采购管理平台</li>
+          </ul>
+        </div>
+
+        <!-- 科研人员数字化工具 -->
+        <div class="footer-column">
+          <h3 class="footer-column-title">科研人员数字化工具</h3>
+          <ul class="footer-list">
+            <li class="footer-list-item">文献管理</li>
+            <li class="footer-list-item">科研学堂</li>
+            <li class="footer-list-item">生信宝库</li>
+            <li class="footer-list-item">生物序列示意图绘制工具</li>
+            <li class="footer-list-item">通用绘图平台</li>
+            <li class="footer-list-item">论文查重</li>
+            <li class="footer-list-item">图片比对</li>
+            <li class="footer-list-item">学术期刊封面设计</li>
+            <li class="footer-list-item">学术主页</li>
+            <li class="footer-list-item">电子名片</li>
+            <li class="footer-list-item">科研协作与成果转化</li>
+          </ul>
+        </div>
+
+        <!-- 关于 -->
+        <div class="footer-column">
+          <h3 class="footer-column-title">关于</h3>
+          <ul class="footer-list">
+            <li class="footer-list-item">产品介绍</li>
+            <li class="footer-list-item">科研生态服务</li>
+            <li class="footer-list-item">公司介绍</li>
+            <li class="footer-list-item">客户代表</li>
+            <li class="footer-list-item">实力认证</li>
+          </ul>
+        </div>
+
+        <!-- 联系我们 -->
+        <div class="footer-column">
+          <h3 class="footer-column-title">联系我们</h3>
+          <div class="footer-social-row">
+            <img src="./asset/icons/svg_06d318b4.svg" class="social-icon" alt="微信" />
+            <img src="./asset/icons/svg_06e27a35.svg" class="social-icon" alt="QQ" />
+            <div class="social-icon-box">
+              <img src="./asset/icons/svg_95ba60c5.svg" alt="小红书" />
+            </div>
+            <img src="./asset/icons/svg_06851831.svg" class="social-icon" alt="微博" />
+          </div>
+          <div class="footer-qr-group">
+            <img src="./asset/images/af0363a566b4480cc1e379616373fef2.png"
+                 class="footer-qrcode"
+                 alt="二维码" />
+            <p class="footer-qr-text">
+              关注公众号<br/>获取更多服务
+            </p>
+          </div>
+          <p class="footer-subtitle">更多新动态</p>
+          <ul class="footer-list">
+            <li class="footer-contact-item">电话：020-31956719</li>
+            <li class="footer-contact-item">邮箱：service@rjmart.cn</li>
+            <li class="footer-contact-item">地址：广东省广州市海珠区新港西路105号广东生物资源大厦A座14层</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 版权信息 -->
+      <div class="footer-legal">
+        <div class="footer-legal-logo">
+          <img src="./asset/icons/svg_7c46413a.svg" alt="Logo" />
+        </div>
+        <div class="footer-legal-text">
+          <span>Copyright © 2016-2025 广州锐竞信息科技有限责任公司版权所有</span>
+          <span class="footer-divider">|</span>
+          <span>营业执照</span>
+          <span class="footer-divider">|</span>
+          <span>粤ICP备16055118号-3</span>
+          <span class="footer-divider">|</span>
+          <span>粤公网安备 44011202001087号</span>
+        </div>
+        <div class="footer-legal-text">
+          <span>增值电信业务许可证: 粤B2-20181576</span>
+          <span class="footer-divider">|</span>
+          <span>互联网诚信企业单位</span>
+          <span class="footer-divider">|</span>
+          <span>联网药品信息服务资格证书: (粤)-经营性-2023-0440</span>
+          <span class="footer-divider">|</span>
+          <span>备案编号: (粤)网械平台备字（2019）第00006号</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="./scripts/feature-data.js"></script>
+  <script src="./scripts/main.js"></script>
+</body>
+</html>
