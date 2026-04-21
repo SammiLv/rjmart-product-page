@@ -1,3 +1,0 @@
-# asset/videos 下 mp4 使用 Git LFS
-# 本机需安装 https://git-lfs.github.com/ 并在仓库根目录执行：git lfs install
-asset/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
