@@ -1,5 +1,5 @@
 # macOS
 .DS_Store
 
-# 大体积视频：放在本地或 CDN，不提交到仓库（避免 push 过大）
-asset/videos/*.mp4
+# Windows
+Thumbs.db
