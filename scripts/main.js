@@ -3,6 +3,17 @@ let featureCopyAnimationFrame = null;
 let featureCopyAnimationTimer = null;
 let featureCopyDelayTimer = null;
 
+/** 平台介绍视频地址：① 进入页约 3s 自动弹窗播放 ② 主图「平台介绍」按钮打开弹窗播放（共用 #hero-intro-video） */
+const HERO_INTRO_VIDEO_SRC =
+  'https://ai-files-storage.oss-cn-guangzhou.aliyuncs.com/%E9%94%90%E7%AB%9E%E9%87%87%E8%B4%AD%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D%E8%A7%86%E9%A2%91.mp4';
+
+function bindHeroIntroVideoSource() {
+  const video = document.getElementById('hero-intro-video');
+  if (video) {
+    video.src = HERO_INTRO_VIDEO_SRC;
+  }
+}
+
 function buildFeatureCarousel() {
   const track = document.getElementById('feature-carousel-track');
   if (!track) {
@@ -219,6 +230,7 @@ function closeHeroIntroVideoModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  bindHeroIntroVideoSource();
   buildFeatureCarousel();
 
   const supplierRows = document.querySelectorAll('#supplier-section .supplier-brand-row');
