@@ -3,6 +3,3 @@
 
 # Windows
 Thumbs.db
-
-# 介绍视频等走 OSS，本地 mp4 不纳入仓库
-asset/videos/*.mp4
