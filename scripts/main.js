@@ -1,11 +1,20 @@
 let currentFeature = 0;
-let featureCopyAnimationFrame = null;
 let featureCopyAnimationTimer = null;
-let featureCopyDelayTimer = null;
+let featureCopyRunId = 0;
+
+/** 离场：描述与标题两块错开（stagger）；进场：整块简单滑入 */
+const FEATURE_COPY_LEAVE_STAGGER_MS = 72;
+const FEATURE_COPY_SEG_LEAVE_MS = 400;
+const FEATURE_COPY_LEAVE_PAD_MS = 48;
+const FEATURE_COPY_ENTER_ANIM_MS = 320;
+
+function flattenFeatureCopy(title, desc, titleText, descText) {
+  title.textContent = titleText;
+  desc.textContent = descText;
+}
 
 /** 平台介绍视频地址：① 进入页约 3s 自动弹窗播放 ② 主图「平台介绍」按钮打开弹窗播放（共用 #hero-intro-video） */
-const HERO_INTRO_VIDEO_SRC =
-  'https://ai-files-storage.oss-cn-guangzhou.aliyuncs.com/%E9%94%90%E7%AB%9E%E9%87%87%E8%B4%AD%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D%E8%A7%86%E9%A2%91.mp4';
+const HERO_INTRO_VIDEO_SRC = './asset/videos/锐竞采购平台介绍视频.mp4';
 
 function bindHeroIntroVideoSource() {
   const video = document.getElementById('hero-intro-video');
@@ -40,49 +49,51 @@ function animateFeatureCopy(feature, immediate = false) {
     return;
   }
 
-  if (featureCopyAnimationFrame) {
-    cancelAnimationFrame(featureCopyAnimationFrame);
-    featureCopyAnimationFrame = null;
-  }
-
   if (featureCopyAnimationTimer) {
     clearTimeout(featureCopyAnimationTimer);
     featureCopyAnimationTimer = null;
   }
 
-  if (featureCopyDelayTimer) {
-    clearTimeout(featureCopyDelayTimer);
-    featureCopyDelayTimer = null;
-  }
-
   if (immediate) {
-    copy.classList.remove('is-leaving', 'is-entering');
-    title.textContent = feature.title;
-    desc.textContent = feature.desc;
+    copy.classList.remove('is-leaving', 'is-entering', 'is-leaving-blocks');
+    flattenFeatureCopy(title, desc, feature.title, feature.desc);
     return;
   }
 
-  copy.classList.remove('is-entering', 'is-leaving');
+  copy.classList.remove('is-entering', 'is-leaving', 'is-leaving-blocks');
+  featureCopyRunId += 1;
+  const runId = featureCopyRunId;
 
-  const copyLeaveDelayMs = 100;
+  void title.offsetHeight;
+  copy.classList.add('is-leaving-blocks');
 
-  featureCopyDelayTimer = setTimeout(() => {
-    featureCopyDelayTimer = null;
-    copy.classList.add('is-leaving');
+  const leaveEnd =
+    FEATURE_COPY_SEG_LEAVE_MS + FEATURE_COPY_LEAVE_STAGGER_MS + FEATURE_COPY_LEAVE_PAD_MS;
 
-    featureCopyAnimationTimer = setTimeout(() => {
-      title.textContent = feature.title;
-      desc.textContent = feature.desc;
-      copy.classList.remove('is-leaving');
+  featureCopyAnimationTimer = setTimeout(() => {
+    if (runId !== featureCopyRunId) {
+      return;
+    }
+
+    copy.classList.remove('is-leaving-blocks');
+    flattenFeatureCopy(title, desc, feature.title, feature.desc);
+    copy.classList.remove('is-entering');
+    requestAnimationFrame(() => {
+      if (runId !== featureCopyRunId) {
+        return;
+      }
       copy.classList.add('is-entering');
-
-      featureCopyAnimationFrame = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         featureCopyAnimationTimer = setTimeout(() => {
+          featureCopyAnimationTimer = null;
+          if (runId !== featureCopyRunId) {
+            return;
+          }
           copy.classList.remove('is-entering');
-        }, 320);
+        }, FEATURE_COPY_ENTER_ANIM_MS);
       });
-    }, 220);
-  }, copyLeaveDelayMs);
+    });
+  }, leaveEnd);
 }
 
 function updateFeature(index, options = {}) {
