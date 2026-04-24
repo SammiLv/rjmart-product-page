@@ -592,6 +592,8 @@
     /* 采购人员面板 */
     .buyer-panel {
       display: none;
+      position: relative;
+      overflow: hidden;
     }
 
     .buyer-panel.active {
@@ -606,12 +608,23 @@
       padding: 60px 0 48px;
     }
 
+    .buyer-bg-decoration {
+      position: absolute;
+      left: 7.19px;
+      top: -39.81px;
+      width: 200px;
+      height: 200px;
+      background-image: url('../asset/icons/svg_06c1b636.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     .buyer-icon {
       width: 80px;
       height: 80px;
-      background-image: url('https://image-resource.mastergo.com/190172646234105/162086278709079/e638fd31e5f17a4eb3ae2174f2b156b4.png');
-      background-size: contain;
-      background-repeat: no-repeat;
+      object-fit: cover;
     }
 
     .buyer-text {
@@ -831,6 +844,10 @@
       height: 100%;
       object-fit: cover;
       z-index: 0;
+      /* 图片优化 */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      will-change: transform;
     }
 
     .hero-content {

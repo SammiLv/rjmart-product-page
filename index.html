@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>锐竞采购平台</title>
+  <!-- 预加载关键资源 -->
+  <link rel="preload" as="image" href="./asset/images/2719b3e33a689b1fbf8936a420e613a2.png" />
   <link rel="stylesheet" href="./styles/base.css" />
 </head>
 <body>
@@ -40,7 +42,11 @@
 
     <!-- Hero区域 -->
     <section class="hero">
-      <img src="./asset/images/2719b3e33a689b1fbf8936a420e613a2.png" class="hero-bg" alt="背景" />
+      <img src="./asset/images/2719b3e33a689b1fbf8936a420e613a2.png"
+           class="hero-bg"
+           alt="背景"
+           loading="eager"
+           fetchpriority="high" />
       <div class="hero-content">
         <h1 class="hero-title">锐竞采购平台</h1>
         <p class="hero-subtitle">科研物资采购全流程数字化、智能化、规范化管理</p>
@@ -174,6 +180,9 @@
 
         <!-- 采购人员内容 -->
         <div class="float-form-content buyer-panel" id="buyer-panel-content">
+          <!-- 背景装饰 -->
+          <div class="buyer-bg-decoration"></div>
+
           <div class="float-header">
             <div class="float-title">免费使用</div>
             <div class="float-subtitle">填写联系信息，即可申请单位免费入驻</div>
@@ -185,7 +194,7 @@
           </div>
 
           <div class="buyer-content">
-            <div class="buyer-icon"></div>
+            <img src="./asset/images/e638fd31e5f17a4eb3ae2174f2b156b4.png" class="buyer-icon" alt="采购图标" />
             <div class="buyer-text">直接注册，立即开始采购</div>
             <button class="buyer-register-btn" id="buyer-register-btn">前往平台注册</button>
           </div>
