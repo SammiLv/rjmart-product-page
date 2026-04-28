@@ -104,6 +104,11 @@ function updateFeature(index, options = {}) {
   animateFeatureCopy(feature, immediate);
 
   document.querySelectorAll('.feature-tab').forEach((tab, i) => {
+    const feature = window.features[i];
+    const img = tab.querySelector('img');
+    if (img && feature) {
+      img.src = i === index ? feature.iconActive : feature.iconDefault;
+    }
     if (i === index) {
       tab.classList.add('active');
     } else {
