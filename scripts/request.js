@@ -4,7 +4,7 @@
  * 基于原生 fetch 实现，适配当前无构建工具的静态项目。
  *
  * 用法示例：
- *   import { api } from './scripts/request.js';
+ *   // 非打包环境：通过 window.RjRequest.api 调用（见 index.html 引入顺序）
  *
  *   // GET
  *   const data = await api.get('/some/path', { page: 1 });
@@ -257,9 +257,6 @@ const api = {
   },
 };
 
-// ==================== 导出 ====================
+// ==================== 全局导出（供静态页 script 标签直接使用；勿改为 ES Module，否则 file:// 打开会失败） ====================
 
-export { API_CONFIG, RequestError, request, api };
-
-// 同时挂到 window 上，方便非 module 脚本使用
 window.RjRequest = { API_CONFIG, RequestError, request, api };

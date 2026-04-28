@@ -747,7 +747,7 @@
         <div class="footer-legal-logo">
           <img src="./asset/icons/svg_7c46413a.svg" alt="Logo" />
         </div>
-        <div class="footer-legal-text">
+        <div class="footer-legal-text" id="footer-legal-line1">
           <span>Copyright © 2016-2025 广州锐竞信息科技有限责任公司版权所有</span>
           <span class="footer-divider">|</span>
           <span>营业执照</span>
@@ -756,7 +756,7 @@
           <span class="footer-divider">|</span>
           <span>粤公网安备 44011202001087号</span>
         </div>
-        <div class="footer-legal-text">
+        <div class="footer-legal-text" id="footer-legal-line2">
           <span>增值电信业务许可证: 粤B2-20181576</span>
           <span class="footer-divider">|</span>
           <span>互联网诚信企业单位</span>
@@ -768,7 +768,10 @@
       </div>
     </footer>
   </div>
+  <!-- 勿使用 type="module"：直接双击打开 file:// 时浏览器会拦截模块脚本，导致 RjRequest 无法加载 -->
+  <script src="./scripts/request.js"></script>
   <script src="./scripts/feature-data.js"></script>
   <script src="./scripts/main.js"></script>
+  <script src="./scripts/footer.js"></script>
 </body>
 </html>
