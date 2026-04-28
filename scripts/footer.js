@@ -17,8 +17,65 @@ function escapeAttr(str) {
   return escapeHtml(str).replace(/`/g, '&#96;');
 }
 
+function normalizeWhitespace(s) {
+  return String(s || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 /**
- * 接口常返回以 / 开头的相对路径；挂在 GitHub Pages 时浏览器会按当前站点域名解析导致裂图。
+ * 后端可能返回数字或字符串 "2" / "3"，严格 === 会导致外链分支整条失效。
+ */
+function normalizeClickType(raw) {
+  const n = Number(raw);
+  if (Number.isFinite(n) && (n === 1 || n === 2 || n === 3)) {
+    return n;
+  }
+  return NaN;
+}
+
+function isLinkClickType(ct) {
+  return ct === 2 || ct === 3;
+}
+
+/** 兼容多种字段名 */
+function pickLogoRaw(item) {
+  if (!item || typeof item !== 'object') {
+    return '';
+  }
+  const keys = ['logoUrl', 'logo', 'iconUrl', 'imageUrl', 'picUrl', 'icon'];
+  for (const k of keys) {
+    const v = item[k];
+    if (v != null && String(v).trim() && String(v).trim() !== ' ') {
+      return String(v).trim();
+    }
+  }
+  return '';
+}
+
+function pickAttachRaw(item) {
+  if (!item || typeof item !== 'object') {
+    return '';
+  }
+  const keys = ['attachment', 'link', 'url', 'href', 'jumpUrl', 'attachmentUrl', 'targetUrl'];
+  for (const k of keys) {
+    const v = item[k];
+    if (v != null && String(v).trim() && String(v).trim() !== ' ') {
+      return String(v).trim();
+    }
+  }
+  return '';
+}
+
+function pickDisplayText(item) {
+  if (!item) {
+    return '';
+  }
+  return normalizeWhitespace(item.displayNameCn || item.displayNameEn || item.displayName || item.title || '');
+}
+
+/**
+ * 接口常返回相对路径；在 GitHub Pages 上会按当前域名解析导致裂图。
  * 统一补全为网关绝对地址（与 request.js 中 API_CONFIG.baseURL 一致）。
  */
 function resolveAssetUrl(raw) {
@@ -67,8 +124,66 @@ function sortRowBottoms(rows) {
   if (!Array.isArray(rows)) {
     return [];
   }
-  const sorted = [...rows].sort((a, b) => sortKey(a) - sortKey(b));
-  return sorted;
+  return [...rows].sort((a, b) => sortKey(a) - sortKey(b));
+}
+
+function columnStructuralSignature(col) {
+  const item = col && col.bottom;
+  if (!item) {
+    return '';
+  }
+  const text = pickDisplayText(item);
+  const logoRaw = pickLogoRaw(item);
+  const logoResolved = logoRaw ? resolveAssetUrl(logoRaw) : '';
+  const attachRaw = pickAttachRaw(item);
+  const hrefResolved = attachRaw ? resolveAssetUrl(attachRaw) : '';
+  const ct = normalizeClickType(item.clickType);
+  const ctStr = Number.isFinite(ct) ? String(ct) : String(item.clickType ?? '');
+  return [ctStr, text, logoResolved, hrefResolved].join('\u0001');
+}
+
+/**
+ * 同一行内：规范化文案相同的多条配置合并为一条，优先保留「带 logo」的那条，
+ * 避免后端拆成「只有字 / 只有图 / 图+字」导致同一备案文案出现两次。
+ */
+function pickBestDuplicateColumn(group) {
+  if (group.length === 1) {
+    return group[0];
+  }
+  let best = group[0];
+  let bestHasLogo = Boolean(pickLogoRaw(best.bottom));
+  for (let i = 1; i < group.length; i++) {
+    const col = group[i];
+    const hasLogo = Boolean(pickLogoRaw(col.bottom));
+    if (hasLogo && !bestHasLogo) {
+      best = col;
+      bestHasLogo = true;
+    } else if (hasLogo === bestHasLogo && sortKey(col) < sortKey(best)) {
+      best = col;
+    }
+  }
+  return best;
+}
+
+function dedupePreferringLogo(sortedCols) {
+  const groups = new Map();
+  const keyOrder = [];
+  sortedCols.forEach((col, idx) => {
+    const item = col && col.bottom;
+    if (!item) {
+      return;
+    }
+    const text = pickDisplayText(item);
+    const logoRaw = pickLogoRaw(item);
+    const key = text || `__logo_only__${logoRaw ? resolveAssetUrl(logoRaw) : `__idx_${idx}`}`;
+    if (!groups.has(key)) {
+      groups.set(key, []);
+      keyOrder.push(key);
+    }
+    groups.get(key).push(col);
+  });
+
+  return keyOrder.map(k => pickBestDuplicateColumn(groups.get(k)));
 }
 
 function normalizeColumnBottoms(columnBottoms) {
@@ -80,44 +195,24 @@ function normalizeColumnBottoms(columnBottoms) {
     if (!item) {
       return false;
     }
-    const text = (item.displayNameCn || item.displayNameEn || '').trim();
-    const logoUrl = item.logoUrl && String(item.logoUrl).trim() && String(item.logoUrl).trim() !== ' ';
+    const text = pickDisplayText(item);
+    const logoUrl = pickLogoRaw(item);
     return Boolean(text || logoUrl);
   });
   const sorted = filtered.sort((a, b) => sortKey(a) - sortKey(b));
 
-  const seen = new Set();
-  const deduped = [];
+  const seenStruct = new Set();
+  const dedupedStruct = [];
   for (const col of sorted) {
-    const sig = columnDedupeSignature(col);
-    if (seen.has(sig)) {
+    const sig = columnStructuralSignature(col);
+    if (seenStruct.has(sig)) {
       continue;
     }
-    seen.add(sig);
-    deduped.push(col);
+    seenStruct.add(sig);
+    dedupedStruct.push(col);
   }
-  return deduped;
-}
 
-/** 去掉后端重复的栏目（相同文案/图标/链接配置） */
-function columnDedupeSignature(col) {
-  const item = col && col.bottom;
-  if (!item) {
-    return '';
-  }
-  const text = (item.displayNameCn || item.displayNameEn || '').trim();
-  const logoRaw =
-    item.logoUrl && String(item.logoUrl).trim() && String(item.logoUrl).trim() !== ' '
-      ? String(item.logoUrl).trim()
-      : '';
-  const logoResolved = logoRaw ? resolveAssetUrl(logoRaw) : '';
-  const attachRaw =
-    item.attachment && String(item.attachment).trim() && String(item.attachment).trim() !== ' '
-      ? String(item.attachment).trim()
-      : '';
-  const hrefResolved = attachRaw ? resolveAssetUrl(attachRaw) : '';
-  const ct = item.clickType != null ? String(item.clickType) : '';
-  return [ct, text, logoResolved, hrefResolved].join('\u0001');
+  return dedupePreferringLogo(dedupedStruct);
 }
 
 async function loadFooterLegalInfo() {
@@ -143,7 +238,6 @@ async function loadFooterLegalInfo() {
       return;
     }
 
-    // 取第一个语言配置（ZH_CN）
     const config = result.sortBottoms[0];
     const rowBottoms = sortRowBottoms(config.rowBottoms);
 
@@ -156,14 +250,12 @@ async function loadFooterLegalInfo() {
 
     const legalRoot = document.querySelector('.footer-legal');
 
-    // 渲染第一行
     const line1Container = document.getElementById('footer-legal-line1');
     if (line1Container && rowBottoms[0]) {
       renderFooterLine(line1Container, rowBottoms[0].columnBottoms);
       console.log('第一行渲染完成');
     }
 
-    // 渲染第二行（若接口只返回一行，清空第二行占位，避免与设计稿不一致）
     const line2Container = document.getElementById('footer-legal-line2');
     if (line2Container) {
       if (rowBottoms[1]) {
@@ -174,7 +266,6 @@ async function loadFooterLegalInfo() {
       }
     }
 
-    // 接口数据已覆盖文案：隐藏静态占位顶栏 Logo（设计稿仅为两行备案信息 + 行内图标）
     legalRoot?.classList.add('footer-legal--from-api');
   } catch (error) {
     console.error('加载页脚版权信息失败:', error);
@@ -201,71 +292,67 @@ function renderFooterLine(container, columnBottoms) {
     .join('');
 }
 
+function imgTagForFooter(src, opts = {}) {
+  const { alt = '', wrapReferrer = true } = opts;
+  const ref = wrapReferrer ? ' referrerpolicy="no-referrer"' : '';
+  return `<img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" class="footer-legal-inline-icon" loading="lazy" decoding="async"${ref} onerror="this.remove()" />`;
+}
+
 /**
- * 单个备案格子：外链类型下图标与文案合并为同一个 <a>，避免两个链接叠在同一语义上、看起来像「文案重复」。
+ * 单个备案格子：外链类型下图标与文案合并为同一个 <a>。
  */
 function renderFooterCell(item) {
-  const text = (item.displayNameCn || item.displayNameEn || '').trim();
-  const logoRaw =
-    item.logoUrl && String(item.logoUrl).trim() && String(item.logoUrl).trim() !== ' '
-      ? String(item.logoUrl).trim()
-      : '';
+  const text = pickDisplayText(item);
+  const logoRaw = pickLogoRaw(item);
   const logoUrl = logoRaw ? resolveAssetUrl(logoRaw) : '';
-  const clickType = item.clickType;
-  const attachRaw =
-    item.attachment && String(item.attachment).trim() && String(item.attachment).trim() !== ' '
-      ? String(item.attachment).trim()
-      : '';
+  const ct = normalizeClickType(item.clickType);
+  const attachRaw = pickAttachRaw(item);
   const attachment = attachRaw ? resolveAssetUrl(attachRaw) : '';
 
   const textHtml = escapeHtml(text);
 
-  const hasLink = Boolean(attachment && (clickType === 2 || clickType === 3));
+  const hasLink = Boolean(attachment && isLinkClickType(ct));
   if (hasLink && (logoUrl || text)) {
     const innerParts = [];
     if (logoUrl) {
-      innerParts.push(
-        `<img src="${escapeAttr(logoUrl)}" alt="" class="footer-legal-inline-icon" loading="lazy" decoding="async" />`
-      );
+      innerParts.push(imgTagForFooter(logoUrl, { alt: '' }));
     }
     if (text) {
       innerParts.push(`<span class="footer-legal-cell-text">${textHtml}</span>`);
     }
     const inner = innerParts.join('');
-    if (clickType === 3) {
-      return `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" download class="footer-legal-inline-link footer-legal-cell-link">${inner}</a>`;
+    if (ct === 3) {
+      return `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" download class="footer-legal-inline-link footer-legal-cell footer-legal-cell-link">${inner}</a>`;
     }
-    return `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" class="footer-legal-inline-link footer-legal-cell-link">${inner}</a>`;
+    return `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" class="footer-legal-inline-link footer-legal-cell footer-legal-cell-link">${inner}</a>`;
   }
 
   const parts = [];
   if (logoUrl) {
-    parts.push(
-      `<img src="${escapeAttr(logoUrl)}" alt="${escapeAttr(text || 'icon')}" class="footer-legal-inline-icon" loading="lazy" decoding="async" />`
-    );
+    parts.push(imgTagForFooter(logoUrl, { alt: text || 'icon' }));
   }
   if (text) {
-    if (clickType === 2 && attachment) {
-      parts.push(
-        `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" class="footer-legal-inline-link">${textHtml}</a>`
-      );
-    } else if (clickType === 3 && attachment) {
-      parts.push(
-        `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" download class="footer-legal-inline-link">${textHtml}</a>`
-      );
+    if (isLinkClickType(ct) && attachment) {
+      if (ct === 3) {
+        parts.push(
+          `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" download class="footer-legal-inline-link">${textHtml}</a>`
+        );
+      } else {
+        parts.push(
+          `<a href="${escapeAttr(attachment)}" target="_blank" rel="noopener noreferrer" class="footer-legal-inline-link">${textHtml}</a>`
+        );
+      }
     } else {
       parts.push(`<span>${textHtml}</span>`);
     }
   }
-  return parts.join('');
+  return `<span class="footer-legal-cell">${parts.join('')}</span>`;
 }
 
-// 等待 RjRequest 加载完成后执行
 function waitForRjRequest() {
   if (window.RjRequest) {
     loadFooterLegalInfo();
   } else {
-    // 每 50ms 检查一次，最多等待 5 秒
     let attempts = 0;
     const checkInterval = setInterval(() => {
       attempts++;
@@ -280,7 +367,6 @@ function waitForRjRequest() {
   }
 }
 
-// 页面加载完成后执行
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', waitForRjRequest);
 } else {

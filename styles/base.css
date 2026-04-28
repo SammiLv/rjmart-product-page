@@ -1651,6 +1651,11 @@
     }
 
     .footer-legal-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      row-gap: 6px;
       text-align: center;
       color: #939599;
       font-size: 12px;
@@ -1666,11 +1671,12 @@
       text-decoration: none;
     }
 
-    /* 图标 + 备案文案合并为同一外链时保持行内对齐 */
-    .footer-legal-cell-link {
+    /* 图标 + 备案文案作为一个单元对齐，避免图片基线导致文字上下漂移 */
+    .footer-legal-cell {
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      min-height: 18px;
       max-width: 100%;
     }
 
@@ -1691,16 +1697,14 @@
     .footer-legal-inline-icon {
       height: 16px;
       width: auto;
-      vertical-align: middle;
-      margin-right: 4px;
-      display: inline-block;
-    }
-
-    a.footer-legal-inline-link--icon .footer-legal-inline-icon {
-      margin-right: 4px;
+      flex: 0 0 auto;
+      display: block;
     }
 
     .footer-divider {
+      display: inline-flex;
+      align-items: center;
+      min-height: 18px;
       margin: 0 8px;
     }
 
