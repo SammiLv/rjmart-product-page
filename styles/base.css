@@ -1620,6 +1620,15 @@
       margin-top: 16px;
     }
 
+    .footer-list-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer-list-item a:hover {
+      color: #165DFF;
+    }
+
     .footer-legal {
       width: 1280px;
       margin: 48px auto 0;
