@@ -1666,6 +1666,24 @@
       text-decoration: none;
     }
 
+    /* 图标 + 备案文案合并为同一外链时保持行内对齐 */
+    .footer-legal-cell-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      max-width: 100%;
+    }
+
+    .footer-legal-cell-text {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .footer-legal-cell-text {
+        white-space: normal;
+      }
+    }
+
     .footer-legal-inline-link:hover {
       color: #165dff;
     }
