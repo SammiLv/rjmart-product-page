@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>API Test</title>
+</head>
+<body>
+  <h1>Testing API Request</h1>
+  <div id="output"></div>
+
+  <script src="./scripts/request.js"></script>
+  <script>
+    const output = document.getElementById('output');
+
+    async function testAPI() {
+      try {
+        output.innerHTML += '<p>Testing API call...</p>';
+        console.log('RjRequest available:', window.RjRequest);
+
+        const result = await window.RjRequest.api.post('/store/oms/bizClue/submit', {
+          domain: 'www.test.rj-info.com',
+          contactName: 'Test User',
+          userName: 'Test User',
+          realName: 'Test User',
+          phone: '13800138000',
+          contactPhone: '13800138000',
+          mobile: '13800138000',
+          tenantName: 'Test Company',
+          message: 'Test message',
+          remark: 'Test message'
+        });
+
+        output.innerHTML += '<p>Success: ' + JSON.stringify(result) + '</p>';
+        console.log('API result:', result);
+      } catch (error) {
+        output.innerHTML += '<p style="color: red;">Error: ' + error.message + '</p>';
+        console.error('API error:', error);
+      }
+    }
+
+    testAPI();
+  </script>
+</body>
+</html>

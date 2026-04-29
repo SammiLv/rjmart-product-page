@@ -15,6 +15,8 @@ function flattenFeatureCopy(title, desc, titleText, descText) {
 
 /** 平台介绍视频地址：① 进入页约 3s 自动弹窗播放 ② 主图「平台介绍」按钮打开弹窗播放（共用 #hero-intro-video） */
 const HERO_INTRO_VIDEO_SRC = './asset/videos/锐竞采购平台介绍视频.mp4';
+const BIZ_CLUE_SUBMIT_URL = '/store/oms/bizClue/submit';
+const BIZ_CLUE_DOMAIN = 'www.test.rj-info.com';
 
 function bindHeroIntroVideoSource() {
   const video = document.getElementById('hero-intro-video');
@@ -191,6 +193,29 @@ function validatePhone(phone) {
   return phoneRegex.test(phone);
 }
 
+function buildBizCluePayload({ name, phone, company, message }) {
+  return {
+    domain: BIZ_CLUE_DOMAIN,
+    contactName: name,
+    userName: name,
+    realName: name,
+    phone,
+    contactPhone: phone,
+    mobile: phone,
+    tenantName: company,
+    message,
+    remark: message,
+  };
+}
+
+function setFloatSubmitLoading(button, isLoading) {
+  if (!button) {
+    return;
+  }
+  button.disabled = isLoading;
+  button.textContent = isLoading ? '提交中...' : '提交您的申请';
+}
+
 function showError(input) {
   input.classList.add('error');
 }
@@ -343,8 +368,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const floatName = document.getElementById('float-name');
   const floatPhone = document.getElementById('float-phone');
   const floatCompany = document.getElementById('float-company');
+  const floatMessage = document.getElementById('float-message');
+  const floatSubmitBtn = floatForm.querySelector('.float-submit-btn');
   const mainPanel = document.getElementById('main-panel');
   const floatingWindow = document.querySelector('.floating-window');
+  let isFloatFormSubmitting = false;
 
   floatCloseBtn.addEventListener('click', () => {
     mainPanel.style.display = 'none';
@@ -369,8 +397,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  floatForm.addEventListener('submit', e => {
+  floatForm.addEventListener('submit', async e => {
     e.preventDefault();
+    if (isFloatFormSubmitting) {
+      return;
+    }
 
     let isValid = true;
 
@@ -396,8 +427,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isValid) {
-      switchFloatPanel('success');
-      floatForm.reset();
+      isFloatFormSubmitting = true;
+      setFloatSubmitLoading(floatSubmitBtn, true);
+
+      try {
+        if (!window.RjRequest?.api) {
+          throw new Error('请求服务暂不可用，请稍后重试');
+        }
+
+        await window.RjRequest.api.post(
+          BIZ_CLUE_SUBMIT_URL,
+          buildBizCluePayload({
+            name: floatName.value.trim(),
+            phone: floatPhone.value.trim(),
+            company: floatCompany.value.trim(),
+            message: floatMessage.value.trim(),
+          })
+        );
+
+        switchFloatPanel('success');
+        floatForm.reset();
+      } catch (error) {
+        alert(error?.message || '提交失败，请稍后重试');
+      } finally {
+        isFloatFormSubmitting = false;
+        setFloatSubmitLoading(floatSubmitBtn, false);
+      }
     }
   });
 

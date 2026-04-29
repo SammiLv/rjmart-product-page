@@ -292,6 +292,11 @@
       background: #2557D6;
     }
 
+    .float-submit-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
     /* 关闭按钮 */
     .float-close-btn {
       position: absolute;
@@ -1555,6 +1560,55 @@
     .social-icon-box img {
       width: 25px;
       height: 25px;
+    }
+
+    .social-icon-qr-wrap {
+      position: relative;
+      display: inline-flex;
+      cursor: pointer;
+    }
+
+    .social-icon-qr-popup {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      padding: 8px;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .social-icon-qr-popup img {
+      width: 120px;
+      height: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .social-icon-qr-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #fff;
+    }
+
+    .social-icon-qr-text {
+      margin: 6px 0 0;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .social-icon-qr-wrap:hover .social-icon-qr-popup {
+      display: block;
     }
 
     .footer-qrcode {
